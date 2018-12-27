@@ -1,0 +1,100 @@
+--- a/termite.cc
++++ b/termite.cc
+@@ -184,6 +184,21 @@ static void override_background_color(GtkWidget *widget, GdkRGBA *rgba) {
+     g_object_unref(provider);
+ }
+ 
++static void override_foreground_color(GtkWidget *widget, GdkRGBA *rgba) {
++    GtkCssProvider *provider = gtk_css_provider_new();
++
++    gchar *colorstr = gdk_rgba_to_string(rgba);
++    char *css = g_strdup_printf("* { color: %s; }", colorstr);
++    gtk_css_provider_load_from_data(provider, css, -1, nullptr);
++    g_free(colorstr);
++    g_free(css);
++
++    gtk_style_context_add_provider(gtk_widget_get_style_context(widget),
++                                   GTK_STYLE_PROVIDER(provider),
++                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
++    g_object_unref(provider);
++}
++
+ static const std::map<int, const char *> modify_table = {
+     { GDK_KEY_Tab,        "\033[27;5;9~"  },
+     { GDK_KEY_Return,     "\033[27;5;13~" },
+@@ -1211,8 +1226,43 @@ static void bell_cb(GtkWidget *vte, gboolean *urgent_on_bell) {
+     }
+ }
+ 
+-gboolean focus_cb(GtkWindow *window) {
++static maybe<GdkRGBA> unfocused_background_color;
++static maybe<GdkRGBA> background_color;
++
++static maybe<GdkRGBA> unfocused_foreground_color;
++static maybe<GdkRGBA> foreground_color;
++
++static VteTerminal *vte;
++
++gboolean focus_out_cb(GtkWindow *window) {
++    gtk_window_set_urgency_hint(window, FALSE);
++
++    if (unfocused_background_color) {
++        vte_terminal_set_color_background(vte, &*unfocused_background_color);
++        override_background_color(GTK_WIDGET(window), &*unfocused_background_color);
++    }
++
++    if (unfocused_foreground_color) {
++        vte_terminal_set_color_foreground(vte, &*unfocused_foreground_color);
++        override_foreground_color(GTK_WIDGET(window), &*unfocused_foreground_color);
++    }
++
++    return FALSE;
++}
++
++gboolean focus_in_cb(GtkWindow *window) {
+     gtk_window_set_urgency_hint(window, FALSE);
++
++    if (background_color) {
++        vte_terminal_set_color_background(vte, &*background_color);
++        override_background_color(GTK_WIDGET(window), &*background_color);
++    }
++
++    if (foreground_color) {
++        vte_terminal_set_color_foreground(vte, &*foreground_color);
++        override_foreground_color(GTK_WIDGET(window), &*foreground_color);
++    }
++
+     return FALSE;
+ }
+ /* }}} */
+@@ -1392,6 +1442,10 @@ static void load_theme(GtkWindow *window, VteTerminal *vte, GKeyFile *config, hi
+         vte_terminal_set_color_background(vte, &*color);
+         override_background_color(GTK_WIDGET(window), &*color);
+     }
++    unfocused_background_color = get_config_color(config, "colors", "unfocused_background");
++    background_color = get_config_color(config, "colors", "background");
++    unfocused_foreground_color = get_config_color(config, "colors", "unfocused_foreground");
++    foreground_color = get_config_color(config, "colors", "foreground");
+     if (auto color = get_config_color(config, "colors", "cursor")) {
+         vte_terminal_set_color_cursor(vte, &*color);
+     }
+@@ -1664,7 +1718,7 @@ int main(int argc, char **argv) {
+     GtkWidget *hint_overlay = gtk_overlay_new();
+ 
+     GtkWidget *vte_widget = vte_terminal_new();
+-    VteTerminal *vte = VTE_TERMINAL(vte_widget);
++    vte = VTE_TERMINAL(vte_widget);
+ 
+     GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+     gtk_style_context_add_class(gtk_widget_get_style_context(hbox),"termite");
+@@ -1750,8 +1804,8 @@ int main(int argc, char **argv) {
+     draw_cb_info draw_cb_info{vte, &info.panel, &info.config.hints, info.config.filter_unmatched_urls};
+     g_signal_connect_swapped(info.panel.da, "draw", G_CALLBACK(draw_cb), &draw_cb_info);
+ 
+-    g_signal_connect(window, "focus-in-event",  G_CALLBACK(focus_cb), nullptr);
+-    g_signal_connect(window, "focus-out-event", G_CALLBACK(focus_cb), nullptr);
++    g_signal_connect(window, "focus-in-event",  G_CALLBACK(focus_in_cb), nullptr);
++    g_signal_connect(window, "focus-out-event", G_CALLBACK(focus_out_cb), nullptr);
+ 
+     on_alpha_screen_changed(GTK_WINDOW(window), nullptr, nullptr);
+     g_signal_connect(window, "screen-changed", G_CALLBACK(on_alpha_screen_changed), nullptr);

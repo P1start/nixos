@@ -1,0 +1,47 @@
+--- a/src/floating.c
++++ b/src/floating.c
+@@ -883,25 +883,25 @@ drag_result_t drag_pointer(Con *con, const xcb_button_press_event_t *event, xcb_
+     free(reply);
+ 
+     /* Grab the keyboard */
+-    xcb_grab_keyboard_cookie_t keyb_cookie;
+-    xcb_grab_keyboard_reply_t *keyb_reply;
+-
+-    keyb_cookie = xcb_grab_keyboard(conn,
+-                                    false, /* get all keyboard events */
+-                                    root,  /* grab the root window */
+-                                    XCB_CURRENT_TIME,
+-                                    XCB_GRAB_MODE_ASYNC, /* continue processing pointer events as normal */
+-                                    XCB_GRAB_MODE_ASYNC  /* keyboard mode */
+-                                    );
+-
+-    if ((keyb_reply = xcb_grab_keyboard_reply(conn, keyb_cookie, &error)) == NULL) {
+-        ELOG("Could not grab keyboard (error_code = %d)\n", error->error_code);
+-        free(error);
+-        xcb_ungrab_pointer(conn, XCB_CURRENT_TIME);
+-        return DRAG_ABORT;
+-    }
+-
+-    free(keyb_reply);
++    //xcb_grab_keyboard_cookie_t keyb_cookie;
++    //xcb_grab_keyboard_reply_t *keyb_reply;
++
++    //keyb_cookie = xcb_grab_keyboard(conn,
++    //                                false, /* get all keyboard events */
++    //                                root,  /* grab the root window */
++    //                                XCB_CURRENT_TIME,
++    //                                XCB_GRAB_MODE_ASYNC, /* continue processing pointer events as normal */
++    //                                XCB_GRAB_MODE_ASYNC  /* keyboard mode */
++    //                                );
++
++    //if ((keyb_reply = xcb_grab_keyboard_reply(conn, keyb_cookie, &error)) == NULL) {
++    //    ELOG("Could not grab keyboard (error_code = %d)\n", error->error_code);
++    //    free(error);
++    //    xcb_ungrab_pointer(conn, XCB_CURRENT_TIME);
++    //    return DRAG_ABORT;
++    //}
++
++    //free(keyb_reply);
+ 
+     /* Go into our own event loop */
+     struct drag_x11_cb loop = {

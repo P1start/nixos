@@ -28,9 +28,6 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dismiss':
 if os.path.exists(dismissed_path) and open(dismissed_path).read().strip() == current_date.strftime('%Y-%m-%d'):
     sys.exit(1)
 
-# FIXME
-highlight_colour = {i.split(':')[0]: i.split(':')[1].strip() for i in open(os.path.join(os.environ['HOME'], '.Xresources')).read().split('\n') if i.strip() != ''}
-
 good_colour = '%{F${colors.foreground}'
 bad_colour = '%{F${colors.foreground-alt}'
 

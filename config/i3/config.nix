@@ -1,4 +1,5 @@
-{ pkgs, lockCommand, terminalCommand, firefoxCommand, i3, rofi, rofiTheme, polybar, ncmpcpp, anki, nvim, brightnessctl, ipython3, ipython2, htop, mpc, thunderbird, pidgin, gucharmap, xResources, polybarConfig, pulseaudio }:
+#{ pkgs, lockCommand, terminalCommand, firefoxCommand, i3, rofi, rofiTheme, polybar, ncmpcpp, anki, nvim, brightnessctl, ipython3, ipython2, htop, mpc, thunderbird, pidgin, gucharmap, xResources, polybarConfig, pulseaudio }:
+{ pkgs }:
 ''
 set $mod Mod4
 
@@ -25,14 +26,14 @@ font pango:scientifica 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id ${terminalCommand}
+bindsym $mod+Return exec --no-startup-id ${pkgs.terminalCommand}
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start rofi
-bindsym $mod+d exec --no-startup-id ${rofi}/bin/rofi -show run -theme ${rofiTheme}
-bindsym $mod+Shift+d exec --no-startup-id ${rofi}/bin/rofi -show drun -theme ${rofiTheme}
+bindsym $mod+d exec --no-startup-id ${pkgs.rofi}/bin/rofi -show run -theme ${pkgs.rofiTheme}
+bindsym $mod+Shift+d exec --no-startup-id ${pkgs.rofi}/bin/rofi -show drun -theme ${pkgs.rofiTheme}
 
 # change focus
 bindsym $mod+h focus left
@@ -120,7 +121,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec --no-startup-id "${i3}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${i3}/bin/i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "${pkgs.i3}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${pkgs.i3}/bin/i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -149,19 +150,19 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Start polybar
-exec_always --no-startup-id sh -c "${pkgs.killall}/bin/killall -9 -r '.*polybar' -u `whoami`; ${polybar}/bin/polybar main -c ${polybarConfig}"
+exec_always --no-startup-id sh -c "${pkgs.killall}/bin/killall -9 -r '.*polybar' -u `whoami`; ${pkgs.polybar}/bin/polybar main -c ${pkgs.polybarConfig}"
 
 # Xresources
-exec --no-startup-id ${pkgs.xorg.xrdb}/bin/xrdb ${xResources}
+exec --no-startup-id ${pkgs.xorg.xrdb}/bin/xrdb ${pkgs.xResources}
 
 # Start up a few applications
-exec --no-startup-id ${firefoxCommand}
-exec --no-startup-id sh -c '${thunderbird}/bin/thunderbird'
-exec --no-startup-id ${pidgin}/bin/pidgin
-exec --no-startup-id ${gucharmap}/bin/gucharmap
-exec --no-startup-id ${terminalCommand} -e "${nvim}/bin/nvim $HOME/org/main.org" --name=termite-notes
-exec --no-startup-id ${anki}/bin/anki
-exec --no-startup-id ${terminalCommand} -e ${ncmpcpp}/bin/ncmpcpp --name=termite-music
+exec --no-startup-id ${pkgs.firefoxCommand}
+exec --no-startup-id sh -c '${pkgs.thunderbird}/bin/thunderbird'
+exec --no-startup-id ${pkgs.pidgin}/bin/pidgin
+exec --no-startup-id ${pkgs.gucharmap}/bin/gucharmap
+exec --no-startup-id ${pkgs.terminalCommand} -e "${pkgs.nvim}/bin/nvim $HOME/org/main.org" --name=termite-notes
+exec --no-startup-id ${pkgs.anki}/bin/anki
+exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.ncmpcpp}/bin/ncmpcpp --name=termite-music
 
 # Hide borders
 hide_edge_borders both
@@ -224,26 +225,26 @@ bindsym $mod+F7 exec --no-startup-id Setxkbmap ussr
 bindsym $mod+F8 exec --no-startup-id Setxkbmap en_futhark
 bindsym $mod+F9 exec --no-startup-id Setxkbmap ru
 
-bindsym XF86AudioPrev exec --no-startup-id ${mpc}/bin/mpc --host=/tmp/mpd.sock prev
-bindsym XF86AudioPlay exec --no-startup-id ${mpc}/bin/mpc --host=/tmp/mpd.sock toggle
-bindsym XF86AudioStop exec --no-startup-id ${mpc}/bin/mpc --host=/tmp/mpd.sock stop
-bindsym XF86AudioNext exec --no-startup-id ${mpc}/bin/mpc --host=/tmp/mpd.sock next
+bindsym XF86AudioPrev exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc --host=/tmp/mpd.sock prev
+bindsym XF86AudioPlay exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc --host=/tmp/mpd.sock toggle
+bindsym XF86AudioStop exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc --host=/tmp/mpd.sock stop
+bindsym XF86AudioNext exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc --host=/tmp/mpd.sock next
 
-bindsym $mod+ctrl+l exec --no-startup-id ${lockCommand}
+bindsym $mod+ctrl+l exec --no-startup-id ${pkgs.lockCommand}
 
 # Brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id ${brightnessctl}/bin/brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec --no-startup-id ${brightnessctl}/bin/brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set +5%
 
 # Volume
-bindsym XF86AudioMute exec --no-startup-id ${pulseaudio}/bin/pactl -- set-sink-mute 0 toggle
-bindsym XF86AudioRaiseVolume exec --no-startup-id ${pulseaudio}/bin/pactl -- set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id ${pulseaudio}/bin/pactl -- set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-volume 0 -5%
 
 # Shortcuts
-bindsym $mod+Mod1+p exec --no-startup-id ${terminalCommand} -e ${ipython3}/bin/ipython3
-bindsym $mod+Mod1+Shift+p exec --no-startup-id ${terminalCommand} -e ${ipython2}/bin/ipython2
-bindsym $mod+Mod1+t exec --no-startup-id ${terminalCommand} -e ${htop}/bin/htop
+bindsym $mod+Mod1+p exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.python37Packages.ipython}/bin/ipython3
+bindsym $mod+Mod1+Shift+p exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.python27Packages.ipython}/bin/ipython2
+bindsym $mod+Mod1+t exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.htop}/bin/htop
 
 focus_follows_mouse no
 ''

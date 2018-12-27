@@ -1,4 +1,8 @@
-{ python3, polybarModules }:
+{ pkgs }:
+with pkgs;
+let
+  python3 = python37Packages.python;
+in
 ''
 [colors]
 background = ''${xrdb:colorscheme.background:#000000}

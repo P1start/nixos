@@ -37,10 +37,10 @@ in
     # Background processes
     mpd burp
     # Desktop features
-    termitePkg polybarPkg rofi i3lock-color
+    termite polybar rofi i3lock-color
     arc-theme arc-icon-theme numix-cursor-theme
     # Desktop applications
-    firefoxPkg thunderbird pidgin anki feh mpv gucharmap mplayer evince
+    firefox thunderbird pidgin anki feh mpv gucharmap mplayer evince
     # Programming
     python3 python2 python37Packages.ipython python27Packages.ipython
     jre

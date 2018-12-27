@@ -2,9 +2,6 @@
 
 # Miscellaneous service configuration.
 
-let
-  cloudflared = pkgs.cloudflared;
-in
 {
   # Enable CUPS
   services.printing.enable = true;

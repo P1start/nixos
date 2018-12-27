@@ -42,16 +42,6 @@
   users.groups.rewi = {
     gid = 1000;
   };
-  users.users.guest = {
-    isNormalUser = true;
-    uid = 1001;
-    group = "guest";
-    description = "Guest User";
-    extraGroups = [ "audio" "backlight" "networkmanager" ];
-  };
-  users.groups.guest = {
-    gid = 1001;
-  };
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

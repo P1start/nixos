@@ -1,4 +1,3 @@
-#{ pkgs, lockCommand, terminalCommand, firefoxCommand, i3, rofi, rofiTheme, polybar, ncmpcpp, anki, nvim, brightnessctl, ipython3, ipython2, htop, mpc, thunderbird, pidgin, gucharmap, xResources, polybarConfig, pulseaudio }:
 { pkgs }:
 ''
 set $mod Mod4
@@ -156,7 +155,7 @@ exec_always --no-startup-id sh -c "${pkgs.killall}/bin/killall -9 -r '.*polybar'
 exec --no-startup-id ${pkgs.xorg.xrdb}/bin/xrdb ${pkgs.xResources}
 
 # Start up a few applications
-exec --no-startup-id ${pkgs.firefoxCommand}
+exec --no-startup-id ${pkgs.firefox}/bin/firefox
 exec --no-startup-id sh -c '${pkgs.thunderbird}/bin/thunderbird'
 exec --no-startup-id ${pkgs.pidgin}/bin/pidgin
 exec --no-startup-id ${pkgs.gucharmap}/bin/gucharmap

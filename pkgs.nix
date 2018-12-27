@@ -31,15 +31,6 @@ let pkgs = oldPkgs // rec {
     vimAlias = true;
     configure = (import ./config/nvim/customization.nix { inherit pkgs; });
   };
-  # Firefox
-  firefox = oldPkgs.firefox // {
-    unwrapped = oldPkgs.firefox.unwrapped.overrideAttrs (oldAttrs: {
-      postPhases = [ ''
-        cp -d --no-preserve='ownership' ${./config/firefox/userChrome.css} lib/firefox/browser/chrome/
-      '' ];
-    });
-  };
-  firefoxCommand = "${firefox}/bin/firefox";
   # rofi
   rofiTheme = ./config/rofi/config.rasi;
   # Theme

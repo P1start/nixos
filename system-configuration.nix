@@ -17,7 +17,7 @@
   # Auto-upgrade
   system.autoUpgrade = {
     enable = true;
-    dates = "19:30";
+    dates = "Sun 19:30";
   };
 
   # Auto-GC

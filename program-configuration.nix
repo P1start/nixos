@@ -41,6 +41,7 @@ in
     arc-theme arc-icon-theme numix-cursor-theme
     # Desktop applications
     firefox thunderbird pidgin anki feh mpv gucharmap mplayer evince
+    steam steam-run-native
     # Programming
     python3 python2 python37Packages.ipython python27Packages.ipython
     jre

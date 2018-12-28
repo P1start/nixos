@@ -13,6 +13,12 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # locate/updatedb
+  services.locate = {
+    enable = true;
+    interval = "17:30";
+  };
+
   # mpd
   systemd.user.services.mpd = {
     description = "Music Player Daemon";

@@ -10,6 +10,8 @@ let
   htopConfig = ./config/htop/htoprc;
   bashPrompt = pkgs.writeShellScriptBin "bash-prompt" (import ./config/bash/prompt.nix { git = pkgs.git; grep = pkgs.gnugrep; sed = pkgs.gnused; });
   promptCommand = "${bashPrompt}/bin/bash-prompt";
+  fishGreeting = import ./config/fish/fish_greeting.nix { bsdgames = pkgs.bsdgames; };
+  fishPrompt = import ./config/fish/fish_prompt.nix { git = pkgs.git; grep = pkgs.gnugrep; sed = pkgs.gnused; fish = pkgs.fish; any-nix-shell = pkgs.any-nix-shell; };
   gtk2Config = ''
     gtk-icon-theme-name="Arc"
     gtk-cursor-theme-name="Numix-Cursor"
@@ -53,7 +55,12 @@ in
 
   ## Per-program configuration
 
-  # bash
+  # fish
+  programs.fish = {
+    enable = true;
+  };
+  users.defaultUserShell = pkgs.fish;
+
   environment.shellAliases = {
     ll = "ls -alFh";
     la = "ls -A";
@@ -62,7 +69,7 @@ in
     latr = "ls -lAtr";
 
     psgrep = "ps auxww|grep -v grep|egrep";
-    lsgrep = "ls|grep -i";
+    lsgrep = "ls|egrep -i";
 
     g = "git";
 
@@ -74,6 +81,10 @@ in
 
     v = "nvim";
   };
+  programs.fish.interactiveShellInit = fishGreeting;
+  programs.fish.promptInit = fishPrompt;
+
+  # bash
   programs.bash.interactiveShellInit = ''
     HISTCONTROL=ignoredups:ignorespace
     HISTSIZE=1000

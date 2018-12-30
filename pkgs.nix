@@ -41,6 +41,8 @@ let pkgs = oldPkgs // rec {
       done
     '';
   });
+  # bsdgames (includes a binary called 'fish' which conflicts with fish shell)
+  bsdgames = oldPkgs.bsdgames.overrideAttrs (oldAttrs: { meta = oldAttrs.meta // { priority = 10; }; });
   # Custom packages
   scientifica = pkgs.callPackage ./pkgs/scientifica/default.nix {};
 };

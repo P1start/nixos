@@ -1,7 +1,8 @@
-{ git, grep, sed, fish, any-nix-shell }:
+{ pkgs }:
+with pkgs;
 ''
 # Setup a wrapper around nix-shell to open fish instead of bash
-${any-nix-shell}/bin/any-nix-shell fish | ${sed}/bin/sed -re 's?\<fish\>?${fish}/bin/fish?g' | source
+${any-nix-shell}/bin/any-nix-shell fish | ${gnused}/bin/sed -re 's?\<fish\>?${fish}/bin/fish?g' | source
 
 function fish_prompt
   set last_status $status
@@ -45,26 +46,26 @@ function fish_right_prompt
   set vcs ""
   set vcs_status (${git}/bin/git status 2>/dev/null)
   if test -n "$vcs_status"
-    set -l branch (echo $vcs_status[1] | ${grep}/bin/egrep 'On branch (.*)' | ${sed}/bin/sed -re 's/On branch (.*)/\1/')
+    set -l branch (echo $vcs_status[1] | ${gnugrep}/bin/egrep 'On branch (.*)' | ${gnused}/bin/sed -re 's/On branch (.*)/\1/')
 
     set -l branch_color $color_vcs_unchanged
-    if echo "$vcs_status" | ${grep}/bin/grep 'Changes to be committed:' >/dev/null
+    if echo "$vcs_status" | ${gnugrep}/bin/grep 'Changes to be committed:' >/dev/null
       set branch_color $color_vcs_staged
     end
-    if echo "$vcs_status" | ${grep}/bin/grep 'Changes not staged for commit:' >/dev/null
+    if echo "$vcs_status" | ${gnugrep}/bin/grep 'Changes not staged for commit:' >/dev/null
       set branch_color $color_vcs_unstaged
     end
 
     set -l untracked_files ""
-    if echo "$vcs_status" | ${grep}/bin/grep 'Untracked files:' >/dev/null
+    if echo "$vcs_status" | ${gnugrep}/bin/grep 'Untracked files:' >/dev/null
       set untracked_files $color_vcs_untracked'*'
     end
 
     set vcs ' '$untracked_files$branch_color$branch
   end
 
-  set stopped_jobs (jobs | grep stopped | wc -l)
-  set running_jobs (jobs | grep running | wc -l)
+  set stopped_jobs (jobs | ${gnugrep}/bin/grep stopped | wc -l)
+  set running_jobs (jobs | ${gnugrep}/bin/grep running | wc -l)
 
   set jobs ""
   if test $stopped_jobs -gt 0
@@ -75,5 +76,31 @@ function fish_right_prompt
   end
 
   echo (set_color normal)$jobs$vcs$nix_shell(set_color normal)
+end
+
+function q --description 'View a file or directory'
+  set -l count (count $argv)
+  if test $count = 0
+    set argv .
+  end
+
+  set -l lessflags -R
+  if test $count -le 1
+    set lessflags -RF
+  end
+
+  set -l exit_status 0
+  for dir in $argv
+    if test -d $dir
+      ls $dir
+    else if test -e $dir
+      ${highlight}/bin/highlight --force -O ansi $dir | ${less}/bin/less $lessflags
+    else
+      echo >&2 "q: file $dir does not exist"
+      set exist_status 1
+    end
+  end
+
+  return $exit_status
 end
 ''

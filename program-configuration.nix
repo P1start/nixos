@@ -11,7 +11,7 @@ let
   bashPrompt = pkgs.writeShellScriptBin "bash-prompt" (import ./config/bash/prompt.nix { git = pkgs.git; grep = pkgs.gnugrep; sed = pkgs.gnused; });
   promptCommand = "${bashPrompt}/bin/bash-prompt";
   fishGreeting = import ./config/fish/fish_greeting.nix { bsdgames = pkgs.bsdgames; };
-  fishPrompt = import ./config/fish/fish_prompt.nix { git = pkgs.git; grep = pkgs.gnugrep; sed = pkgs.gnused; fish = pkgs.fish; any-nix-shell = pkgs.any-nix-shell; };
+  fishPrompt = import ./config/fish/fish_prompt.nix { inherit pkgs; };
   gtk2Config = ''
     gtk-icon-theme-name="Arc"
     gtk-cursor-theme-name="Numix-Cursor"
@@ -33,7 +33,7 @@ in
   environment.systemPackages = with pkgs; [
     # Command-line tools
     wget w3m git killall xlibs.xmodmap file brightnessctl scrot neofetch lsof xorg.xrdb mpc_cli htop gnugrep gnused
-    gnumake pkgconfig pwgen bsdgames
+    gnumake pkgconfig pwgen bsdgames highlight
     # TUI applications
     nvim ncmpcpp
     # Background processes

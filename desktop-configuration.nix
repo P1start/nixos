@@ -25,7 +25,7 @@ in
       };
     desktopManager.default = "none";
     windowManager.default = "i3";
-    videoDrivers = [ "nvidiaLegacy390" "ati" "cirrus" "intel" "vesa" "vmware" "modesetting" ];
+    videoDrivers = [ "nvidiaLegacy391" "ati" "cirrus" "intel" "vesa" "vmware" "modesetting" ];
   };
 
   # Compositor

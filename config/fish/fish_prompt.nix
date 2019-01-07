@@ -90,13 +90,17 @@ function q --description 'View a file or directory'
   end
 
   set -l exit_status 0
-  for dir in $argv
-    if test -d $dir
-      ls $dir
-    else if test -e $dir
-      ${highlight}/bin/highlight --force -O ansi $dir | ${less}/bin/less $lessflags
+  for path in $argv
+    if test -d $path
+      ls $path
+    else if test -e $path
+      if ${file}/bin/file -bi $path | ${gnugrep}/bin/grep charset=binary >/dev/null
+        open $path
+      else
+        ${highlight}/bin/highlight --force -O ansi $path | ${less}/bin/less $lessflags
+      end
     else
-      echo >&2 "q: file $dir does not exist"
+      echo >&2 "q: file $path does not exist"
       set exist_status 1
     end
   end

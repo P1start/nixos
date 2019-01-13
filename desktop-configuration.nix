@@ -76,7 +76,7 @@ in
   };
 
   # Fonts
-  fonts.fonts = with pkgs; [ scientifica unifont unifont_upper ];
+  fonts.fonts = with pkgs; [ scientifica unifont unifont_upper corefonts ];
 
   # GTK+3
   environment.etc."xdg/gtk-3.0/settings.ini" = {

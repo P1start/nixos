@@ -76,7 +76,14 @@ in
   };
 
   # Fonts
-  fonts.fonts = with pkgs; [ scientifica unifont unifont_upper corefonts ];
+  fonts.fonts = with pkgs; [
+    # General
+    corefonts
+    # Bitmap fonts
+    scientifica unifont unifont_upper
+    # Non-Latin scripts
+    akkadian noto-fonts-cjk
+  ];
 
   # GTK+3
   environment.etc."xdg/gtk-3.0/settings.ini" = {

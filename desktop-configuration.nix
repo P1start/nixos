@@ -19,13 +19,13 @@ in
         package = pkgs.i3;
         configFile = pkgs.i3Config;
         extraSessionCommands = ''
-          ${pkgs.xlibs.xmodmap}/bin/xmodmap ${./config/xmodmap} &
           feh --bg-fill ${./assets/wallpaper.jpg} &
         '';
       };
     desktopManager.default = "none";
     windowManager.default = "i3";
     videoDrivers = [ "nvidiaLegacy391" "ati" "cirrus" "intel" "vesa" "vmware" "modesetting" ];
+    xkbOptions = "caps:escape,compose:paus";
   };
 
   # Compositor

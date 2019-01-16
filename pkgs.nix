@@ -1,8 +1,6 @@
 { oldPkgs }:
 
 let pkgs = oldPkgs // rec {
-  # X11
-  xResources = ./config/xresources.nix;
   # i3
   i3 = oldPkgs.i3-gaps.overrideAttrs (_: {
     patches = [
@@ -44,7 +42,9 @@ let pkgs = oldPkgs // rec {
   # bsdgames (includes a binary called 'fish' which conflicts with fish shell)
   bsdgames = oldPkgs.bsdgames.overrideAttrs (oldAttrs: { meta = oldAttrs.meta // { priority = 10; }; });
   # Custom packages
+  my-icons = pkgs.callPackage ./pkgs/icons/default.nix {};
   scientifica = pkgs.callPackage ./pkgs/scientifica/default.nix {};
+  keyboard-layouts = pkgs.callPackage ./pkgs/keyboard-layouts/default.nix {};
 };
 in
   pkgs

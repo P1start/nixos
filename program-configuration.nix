@@ -49,8 +49,8 @@ in
     jre
     gcc
     rustup
-    # Icons
-    (callPackage ./pkgs/icons/default.nix {})
+    # My packages
+    my-icons
   ];
 
   ## Per-program configuration

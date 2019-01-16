@@ -214,15 +214,8 @@ client.focused_inactive $inactive_window_colour $inactive_window_colour $inactiv
 client.urgent           $urgent_window_colour $urgent_window_colour $active_text_colour $urgent_window_colour
 
 # Custom keyboard shortcuts
-bindsym $mod+F1 exec --no-startup-id Setxkbmap us_mod
-bindsym $mod+F2 exec --no-startup-id Setxkbmap dvorak
-bindsym $mod+F3 exec --no-startup-id Setxkbmap gr
-bindsym $mod+F4 exec --no-startup-id Setxkbmap ipa
-bindsym $mod+F5 exec --no-startup-id Setxkbmap apl
-bindsym $mod+F6 exec --no-startup-id Setxkbmap us_hjkl
-bindsym $mod+F7 exec --no-startup-id Setxkbmap ussr
-bindsym $mod+F8 exec --no-startup-id Setxkbmap en_futhark
-bindsym $mod+F9 exec --no-startup-id Setxkbmap ru
+bindsym $mod+F1 exec --no-startup-id ${pkgs.xorg.setxkbmap}/bin/setxkbmap us
+bindsym $mod+F2 exec --no-startup-id "${pkgs.xorg.setxkbmap}/bin/setxkbmap -layout us,us -variant dvp,dvp"
 
 bindsym XF86AudioPrev exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc --host=/tmp/mpd.sock prev
 bindsym XF86AudioPlay exec --no-startup-id ${pkgs.mpc_cli}/bin/mpc --host=/tmp/mpd.sock toggle

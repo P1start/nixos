@@ -39,4 +39,7 @@
     after = [ "network.target" "sound.target" ];
     wantedBy = [ "default.target" ];
   };
+
+  # Start SSH agent on login
+  programs.ssh.startAgent = true;
 }

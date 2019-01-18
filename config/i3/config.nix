@@ -151,9 +151,6 @@ bindsym $mod+r mode "resize"
 # Start polybar
 exec_always --no-startup-id sh -c "${pkgs.killall}/bin/killall -9 -r '.*polybar' -u `whoami`; ${pkgs.polybar}/bin/polybar main -c ${pkgs.polybarConfig}"
 
-# Xresources
-exec --no-startup-id ${pkgs.xorg.xrdb}/bin/xrdb ${pkgs.xResources}
-
 # Start up a few applications
 exec --no-startup-id ${pkgs.firefox}/bin/firefox
 exec --no-startup-id sh -c '${pkgs.thunderbird}/bin/thunderbird'

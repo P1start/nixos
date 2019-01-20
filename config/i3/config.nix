@@ -227,8 +227,8 @@ bindsym XF86MonBrightnessUp exec --no-startup-id ${pkgs.brightnessctl}/bin/brigh
 
 # Volume
 bindsym XF86AudioMute exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-mute 0 toggle
-bindsym XF86AudioRaiseVolume exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-volume 0 +3277
+bindsym XF86AudioLowerVolume exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl -- set-sink-volume 0 -3277
 
 # Shortcuts
 bindsym $mod+Mod1+p exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.python37Packages.ipython}/bin/ipython3

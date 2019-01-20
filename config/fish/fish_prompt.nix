@@ -94,7 +94,7 @@ function q --description 'View a file or directory'
     if test -d $path
       ls $path
     else if test -e $path
-      if ${file}/bin/file -bi $path | ${gnugrep}/bin/grep charset=binary >/dev/null
+      if ${file}/bin/file -Lbi $path | ${gnugrep}/bin/grep charset=binary >/dev/null
         open $path
       else
         ${highlight}/bin/highlight --force -O ansi $path | ${less}/bin/less $lessflags

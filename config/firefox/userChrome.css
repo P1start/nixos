@@ -11,8 +11,8 @@
 
 #nav-bar {
     background-color: #364041 !important;
-    /*filter: grayscale(1) !important;*/
-    box-shadow: none !important;
+    border-color: #364041 !important;
+    box-shadow: 0 1px 0 0 #364041 !important;
 }
 
 #toolbar-menubar {

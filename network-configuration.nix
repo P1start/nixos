@@ -18,7 +18,6 @@
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
   };
-  networking.nameservers = [ "127.0.0.1" ];
 
   # Add a group to disallow internet access
   users.groups.no-internet = {

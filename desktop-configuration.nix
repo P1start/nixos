@@ -25,7 +25,7 @@ in
     desktopManager.default = "none";
     windowManager.default = "i3";
     videoDrivers = [ "nvidiaLegacy391" "ati" "cirrus" "intel" "vesa" "vmware" "modesetting" ];
-    xkbOptions = "caps:escape,compose:paus";
+    xkbOptions = "caps:escape,compose:paus,altwin:prtsc_rwin";
   };
 
   # Compositor

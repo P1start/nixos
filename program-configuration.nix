@@ -33,6 +33,9 @@ let
     sympy
     ipython
     uncertainties
+    setuptools
+    websockets
+    notebook
   ];
 in
 {
@@ -61,6 +64,9 @@ in
     rustup
     # My packages
     my-icons
+    (texlive.combine {
+      inherit (texlive) scheme-medium pgfplots enumitem;
+    })
   ];
 
   ## Per-program configuration

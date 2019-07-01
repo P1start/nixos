@@ -35,7 +35,7 @@ def time_of_day():
     elif now < sunset:
         return "🌞", (now - sunrise) / (sunset - sunrise)
     elif now < dusk:
-        return "🌄", (now - sunset) / (dusk - sunset)
+        return "🌅", (now - sunset) / (dusk - sunset)
     else:
         next_dawn = me.next_rising(sun, use_center=True)
         return "🌌", (now - dusk) / (next_dawn - dusk)

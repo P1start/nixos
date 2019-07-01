@@ -45,6 +45,24 @@ let pkgs = oldPkgs // rec {
   my-icons = pkgs.callPackage ./pkgs/icons/default.nix {};
   scientifica = pkgs.callPackage ./pkgs/scientifica/default.nix {};
   keyboard-layouts = pkgs.callPackage ./pkgs/keyboard-layouts/default.nix {};
+  _python-packages = ppkgs: with ppkgs; [
+    ipython
+    pip
+    setuptools
+    uncertainties
+    matplotlib
+    scipy
+    numpy
+    tkinter
+    sympy
+    notebook
+    ephem
+  ];
+  _python-3-packages = ppkgs: with ppkgs; (_python-packages ppkgs) ++ [
+    websockets
+  ];
+  python2 = (oldPkgs.python.withPackages _python-packages).override (args: { ignoreCollisions = true; });
+  python3 = (oldPkgs.python3.withPackages _python-3-packages).override (args: { ignoreCollisions = true; });
 };
 in
   pkgs

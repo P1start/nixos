@@ -25,18 +25,6 @@ let
     export XDG_CONFIG_DIRS="/etc/xdg:$XDG_CONFIG_DIRS"
     export GTK2_RC_FILES=${pkgs.writeText "iconrc" gtk2Config}:${pkgs.arc-theme}/share/themes/Arc-Darker/gtk-2.0/gtkrc:$GTK2_RC_FILES
   '';
-  python-packages = ppkgs: with ppkgs; [
-    matplotlib
-    scipy
-    numpy
-    tkinter
-    sympy
-    ipython
-    uncertainties
-    setuptools
-    websockets
-    notebook
-  ];
 in
 {
   ## System packages
@@ -45,7 +33,7 @@ in
   environment.systemPackages = with pkgs; [
     # Command-line tools
     wget w3m git killall xlibs.xmodmap file brightnessctl scrot neofetch lsof xorg.xrdb mpc_cli htop gnugrep gnused aria2
-    gnumake pkgconfig pwgen bsdgames highlight manpages
+    gnumake pkgconfig pwgen bsdgames highlight manpages unixtools.xxd
     # TUI applications
     nvim ncmpcpp
     # Background processes
@@ -57,8 +45,8 @@ in
     firefox thunderbird pidgin anki feh mpv gucharmap mplayer evince
     steam steam-run-native
     # Programming
-    (python3.withPackages python-packages)
-    python2 python27Packages.ipython
+    python3
+    python2
     jre
     gcc
     rustup

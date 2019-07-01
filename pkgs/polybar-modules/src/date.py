@@ -57,11 +57,16 @@ def symbolic_name(day):
 def decimal_time(t):
     return (t.hour*3600 + t.minute*60 + t.second + t.microsecond*1e-6) / 3600 / 24
 
+def natural_time():
+    from ephemeris import time_of_day
+    section, fraction = time_of_day()
+    return f"{section} {fraction*100:.0f}%"
+
 def cool_time():
     # Days start approximately at sunrise, years start approximately on 'December' solstice (December 21)
     now = datetime.datetime.now() + datetime.timedelta(days=11, hours=-6)
     today = now.date()
-    return name(today) + '%{T1} ' + '{:.04f}'.format(decimal_time(now.time()))[2:]
+    return name(today) + '%{T1} ' + natural_time()#'%{T1} ' + '{:.04f}'.format(decimal_time(now.time()))[2:]
 
 def iso_time():
     now = datetime.datetime.now()

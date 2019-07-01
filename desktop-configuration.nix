@@ -39,7 +39,7 @@ in
     fadeExclude = [ "name!='i3lock'" ];
     fadeSteps = [ "0.028" "0.07" ];
     backend = "glx";
-    vSync = "opengl-swc";
+    vSync = true;
   };
 
   # Lock screen

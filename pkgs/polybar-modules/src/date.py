@@ -4,6 +4,7 @@ import datetime
 import itertools
 import sys
 import os
+import math
 from common import *
 
 filename = os.path.join(polybar_config, 'timemode')
@@ -60,7 +61,7 @@ def decimal_time(t):
 def natural_time():
     from ephemeris import time_of_day
     section, fraction = time_of_day()
-    return f"{section} {fraction*100:.0f}%"
+    return f"{section} {math.floor(fraction*100):.0f}%"
 
 def cool_time():
     # Days start approximately at sunrise, years start approximately on 'December' solstice (December 21)

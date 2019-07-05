@@ -23,15 +23,12 @@ sunset = me.next_setting(sun)
 
 def time_of_day():
     me.date = now
+    me.horizon = '-18'
     if now < dawn:
-        previous_sunset = me.previous_setting(sun)
-        return "🌌", (now - previous_sunset) / (dawn - previous_sunset)
+        previous_dusk = me.previous_setting(sun, use_center=True)
+        return "🌌", (now - previous_dusk) / (dawn - previous_dusk)
     elif now < sunrise:
         return "🌄", (now - dawn) / (sunrise - dawn)
-    #elif now < noon:
-    #    return "morning", (now - sunrise) / (noon - sunrise)
-    #elif now < sunset:
-    #    return "afternoon", (now - noon) / (sunset - noon)
     elif now < sunset:
         return "🌞", (now - sunrise) / (sunset - sunrise)
     elif now < dusk:

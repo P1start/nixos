@@ -50,6 +50,7 @@ in
     jre
     gcc
     rustup
+    nodejs
     # My packages
     my-icons
     (texlive.combine {

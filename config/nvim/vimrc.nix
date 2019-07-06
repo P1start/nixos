@@ -91,17 +91,6 @@ nmap <Leader>h :on<CR>:vs<CR><C-W>l:find %:t:r.h<CR><C-W>h
 
 ino <M-CR> <esc>O
 
-" LanguageClient
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'beta', 'rls'],
-    \ }
-
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 " Disable arrow keys
 
 noremap <Up> <Nop>
@@ -156,38 +145,7 @@ let g:vimtex_compiler_latexmk = {
     \ ]
     \}
 
-let g:LanguageClient_diagnosticsDisplay = {
-   \    1: {
-   \        "name": "Error",
-   \        "texthl": "ALEError",
-   \        "signText": "*",
-   \        "signTexthl": "ALEErrorSign",
-   \    },
-   \    2: {
-   \        "name": "Warning",
-   \        "texthl": "ALEWarning",
-   \        "signText": "!",
-   \        "signTexthl": "ALEWarningSign",
-   \    },
-   \    3: {
-   \        "name": "Information",
-   \        "texthl": "ALEInfo",
-   \        "signText": "?",
-   \        "signTexthl": "ALEInfoSign",
-   \    },
-   \    4: {
-   \        "name": "Hint",
-   \        "texthl": "ALEInfo",
-   \        "signText": "?",
-   \        "signTexthl": "ALEInfoSign",
-   \    },
-   \}
-
-highlight ALEErrorSign ctermfg=red cterm=bold,inverse
-highlight ALEWarningSign ctermfg=green cterm=inverse
-highlight ALEInfoSign ctermfg=yellow cterm=inverse
-
-highlight ALEError ctermfg=red cterm=bold,inverse
-highlight ALEWarning ctermfg=green cterm=inverse
-highlight ALEInfo ctermfg=yellow cterm=inverse
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 ''

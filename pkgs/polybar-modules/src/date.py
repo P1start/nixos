@@ -49,7 +49,7 @@ def decimal_time(t):
 
 def cool_time():
     now = datetime.datetime.now()
-    today = now.date()
+    today = now.date() + datetime.timedelta(weeks=1)
     return name(today) + '%{T1} ' + now.strftime("%H%M")
 
 def symbolic_time():

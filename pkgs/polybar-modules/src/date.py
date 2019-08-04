@@ -30,12 +30,22 @@ def card_character(suit, value):
 weekdays = ['☾', '♂', '☿', '♃', '♀', '♄', '%{T6}☉%{T1}']
 
 def name(day):
-    year, week, weekday = day.isocalendar()
-    week -= 1
-    weekday -= 1
-
-    value = week % 13
-    suit = week // 13
+    epoch = datetime.date(1999, 12, 27)
+    days = (day - epoch).days
+    weeks = days // 7
+    year = 2000
+    nweeks = 52
+    while weeks >= 0:
+        nweeks = 52
+        if year % 400 != 0 and (year % 100 % 6 == 0 or year % 100 == 51):
+            nweeks = 53
+        weeks -= nweeks
+        year += 1
+    year -= 1
+    weeks += nweeks
+    value = weeks % 13
+    suit = weeks // 13
+    weekday = days % 7
 
     return str(year) + ' %{T1}' + card_character(suit, value) + '%{T1}' + weekdays[weekday]
 
@@ -49,7 +59,7 @@ def decimal_time(t):
 
 def cool_time():
     now = datetime.datetime.now()
-    today = now.date() + datetime.timedelta(weeks=1)
+    today = now.date()
     return name(today) + '%{T1} ' + now.strftime("%H%M")
 
 def symbolic_time():

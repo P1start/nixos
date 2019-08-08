@@ -29,15 +29,17 @@ def card_character(suit, value):
 
 weekdays = ['☾', '♂', '☿', '♃', '♀', '♄', '%{T6}☉%{T1}']
 
+LEAP_YEAR_EXCEPTIONS = { 35, 85, 125, 170, 210, 255, 300, 345, 390 }
+
 def name(day):
-    epoch = datetime.date(1999, 12, 27)
+    epoch = datetime.date(1999, 12, 20)
     days = (day - epoch).days
     weeks = days // 7
     year = 2000
     nweeks = 52
     while weeks >= 0:
         nweeks = 52
-        if year % 400 != 0 and (year % 100 % 6 == 0 or year % 100 == 51):
+        if year % 5 == 0 and year % 400 not in LEAP_YEAR_EXCEPTIONS:
             nweeks = 53
         weeks -= nweeks
         year += 1
@@ -66,7 +68,11 @@ def symbolic_time():
     now = datetime.datetime.now()
     return symbolic_name(now) + now.strftime(' %H%M')
 
+def iso_time():
+    now = datetime.datetime.now()
+    return now.strftime('%Y-%m-%d %H:%M')
+
 if mode == 0:
     print(cool_time())
 elif mode == 1:
-    print(symbolic_time())
+    print(iso_time())

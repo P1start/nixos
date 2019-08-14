@@ -235,8 +235,8 @@ bindsym $mod+Escape exec --no-startup-id xdotool click 1
 bindsym $mod+Shift+Escape exec --no-startup-id xdotool click 3
 
 # Shortcuts
-bindsym $mod+Mod1+p exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.python37Packages.ipython}/bin/ipython3
-bindsym $mod+Mod1+Shift+p exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.python27Packages.ipython}/bin/ipython2
+bindsym $mod+Mod1+p exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.python3}/bin/ipython3
+bindsym $mod+Mod1+Shift+p exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.python2}/bin/ipython2
 bindsym $mod+Mod1+t exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.htop}/bin/htop
 
 focus_follows_mouse no

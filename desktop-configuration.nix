@@ -69,10 +69,12 @@ in
   };
 
   # Enable redshift
-  services.redshift = {
-    enable = true;
-    latitude = "-36.85";
-    longitude = "174.8";
+  services.redshift.enable = true;
+
+  # Location
+  location = {
+    latitude = -36.85;
+    longitude = 174.8;
   };
 
   # Fonts

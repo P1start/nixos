@@ -10,16 +10,20 @@ in
     knownPlugins = pkgs.vimPlugins // plugins;
 
     pluginDictionaries = [
-      { name = "vim-nix"; }
       { name = "vim-gitgutter"; }
       { name = "ctrlp-vim"; }
-      { name = "rust-vim"; }
-      { name = "idris-vim"; }
+      { name = "coc-nvim"; }
       { name = "vim-orgmode"; }
+      # Languages
+      { name = "vim-nix"; }
       { name = "vimtex"; }
       { name = "zig-vim"; }
+      { name = "idris-vim"; }
+      { name = "rust-vim"; }
+      { name = "julia-vim"; }
+      # Custom plugins
       { name = "vim-fish"; }
-      { name = "coc-nvim"; }
+      { name = "vim-glsl"; }
     ];
   };
 }

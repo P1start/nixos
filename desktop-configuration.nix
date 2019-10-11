@@ -85,6 +85,8 @@ in
     scientifica unifont unifont_upper
     # Non-Latin scripts
     akkadian noto-fonts-cjk
+    # Other symbols
+    symbola
   ];
 
   # GTK+3

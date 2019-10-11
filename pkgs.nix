@@ -47,6 +47,7 @@ let pkgs = oldPkgs // rec {
   keyboard-layouts = pkgs.callPackage ./pkgs/keyboard-layouts/default.nix {};
   _python-packages = ppkgs: with ppkgs; [
     ipython
+    pygame
     pip
     setuptools
     uncertainties

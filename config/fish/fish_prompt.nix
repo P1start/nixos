@@ -94,8 +94,13 @@ function q --description 'View a file or directory'
     if test -d $path
       ls $path
     else if test -e $path
-      if ${file}/bin/file -Lbi $path | ${gnugrep}/bin/grep charset=binary >/dev/null
-        open $path
+      if ${file}/bin/file -Lbi $path | ${gnugrep}/bin/grep charset=binary | ${gnugrep}/bin/grep -v inode/x-empty >/dev/null
+        set -l mimetype (${xdg_utils}/bin/xdg-mime query filetype $path)
+        if test $mimetype = application/pdf
+          ${evince}/bin/evince $path 2>/dev/null
+        else
+          open $path
+        end
       else
         ${highlight}/bin/highlight --force -O ansi $path | ${less}/bin/less $lessflags
       end

@@ -5,10 +5,10 @@ stdenv.mkDerivation rec {
   name = "scientifica-${version}";
 
   src = fetchFromGitHub {
-    owner = "NerdyPepper";
+    owner = "P1start";
     repo = "scientifica";
-    rev = "7e8112156c6097b5c48d917b498e53dcfc6fdf15";
-    sha256 = "0rv68q2myaajgzyihlzlrij3vrh2707sff7b6bg4qihbskbv95hh";
+    rev = "d76d473d2f073b46e458908a31d6ce7fb5ce6f7d";
+    sha256 = "1q1zhv3wvm3f9n421cvz115h9a6bf29qvsvi4s1llb34zf4csg97";
   };
 
   installPhase = ''

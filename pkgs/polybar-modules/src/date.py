@@ -22,12 +22,10 @@ if len(sys.argv) > 1:
 
 def card_character(suit, value):
     if suit == 4:
-        return '🃟'
-    if value > 10:
-        value += 1
-    return chr(0x1F0A1 + 16*suit + value)
+        return '★'
+    return ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'][value] + '♠♥♦♣'[suit]
 
-weekdays = ['☾', '♂', '☿', '♃', '♀', '♄', '%{T6}☉%{T1}']
+weekdays = ['☾', '♂', '☿', '♃', '♀', '♄', '☉']
 
 LEAP_YEAR_EXCEPTIONS = { 35, 85, 125, 170, 210, 255, 300, 345, 390 }
 
@@ -45,11 +43,11 @@ def name(day):
         year += 1
     year -= 1
     weeks += nweeks
-    value = weeks % 13
-    suit = weeks // 13
+    suit = weeks % 4
+    value = weeks // 4
     weekday = days % 7
 
-    return str(year) + ' %{T1}' + card_character(suit, value) + '%{T1}' + weekdays[weekday]
+    return str(year) + ' ' + card_character(suit, value) + ' ' + weekdays[weekday]
 
 months = ['%{T3}♑', '%{T3}♒', '%{T3}♓', '%{T3}♈', '%{T6}♉', '%{T3}♊', '%{T6}♋', '%{T3}♌', '%{T5}♍', '%{T3}♎', '%{T3}♏', '%{T6}♐']
 def symbolic_name(day):
@@ -62,7 +60,7 @@ def decimal_time(t):
 def cool_time():
     now = datetime.datetime.now()
     today = now.date()
-    return name(today) + '%{T1} ' + now.strftime("%H%M")
+    return name(today) + ' ' + now.strftime("%H%M")
 
 def symbolic_time():
     now = datetime.datetime.now()

@@ -33,7 +33,7 @@ in
   environment.systemPackages = with pkgs; [
     # Command-line tools
     wget w3m git killall xlibs.xmodmap file brightnessctl scrot neofetch lsof xorg.xrdb mpc_cli htop gnugrep gnused aria2
-    gnumake pkgconfig pwgen bsdgames highlight manpages unixtools.xxd
+    gnumake pkgconfig pwgen bsdgames highlight manpages unixtools.xxd dos2unix
     # TUI applications
     nvim ncmpcpp
     # Background processes

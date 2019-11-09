@@ -43,8 +43,8 @@ def name(day):
         year += 1
     year -= 1
     weeks += nweeks
-    suit = weeks % 4
-    value = weeks // 4
+    value = weeks % 13
+    suit = weeks // 13
     weekday = days % 7
 
     return str(year) + ' ' + card_character(suit, value) + ' ' + weekdays[weekday]

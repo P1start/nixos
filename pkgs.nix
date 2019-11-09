@@ -46,7 +46,6 @@ let pkgs = oldPkgs // rec {
   scientifica = pkgs.callPackage ./pkgs/scientifica/default.nix {};
   keyboard-layouts = pkgs.callPackage ./pkgs/keyboard-layouts/default.nix {};
   _python-packages = ppkgs: with ppkgs; [
-    ipython
     pygame
     pip
     setuptools
@@ -56,13 +55,14 @@ let pkgs = oldPkgs // rec {
     numpy
     tkinter
     sympy
-    notebook
     ephem
   ];
   _python-3-packages = ppkgs: with ppkgs; (_python-packages ppkgs) ++ [
+    ipython
+    notebook
     websockets
   ];
-  python2 = (oldPkgs.python.withPackages _python-packages).override (args: { ignoreCollisions = true; });
+  python2 = (oldPkgs.python2.withPackages _python-packages).override (args: { ignoreCollisions = true; });
   python3 = (oldPkgs.python3.withPackages _python-3-packages).override (args: { ignoreCollisions = true; });
 };
 in

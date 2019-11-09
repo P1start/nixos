@@ -6,9 +6,6 @@
   # Enable CUPS
   services.printing.enable = true;
 
-  # Enable Avahi
-  services.avahi.enable = true;
-
   # Enable sound
   sound.enable = true;
   hardware.pulseaudio.enable = true;

@@ -201,10 +201,10 @@ format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
 
 host = "/tmp/mpd.sock"
 
-icon-prev = "%{T11}⏪%{T7}  "
-icon-stop = ⏹
-icon-play = ⏴
-icon-pause = ⏸
+icon-prev = "%{T11}⏪%{T1} "
+icon-stop = "⏹ "
+icon-play = "⏴ "
+icon-pause = "⏸ "
 icon-next = %{T11}⏩
 
 label-song = %artist% - %title%

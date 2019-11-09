@@ -1,11 +1,10 @@
 @namespace xul url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-#TabsToolbar, #tabbrowser-tabs{
+#TabsToolbar {
     background-color: #2a3233 !important;
     color: #b1bbb8 !important;
     font-family: "scientifica", monospace !important;
     font-size: 10px !important;
-    /*filter: grayscale(1) !important;*/
 }
 
 #nav-bar {
@@ -45,6 +44,10 @@ xul|*:root:-moz-lwtheme {
 
 xul|browser {
     background-color: #364041 !important;
+}
+
+.urlbarView {
+    border: 0 !important;
 }
 
 #urlbar-results, #urlbar-results .urlbarView-row {

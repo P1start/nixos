@@ -27,8 +27,6 @@ def card_character(suit, value):
 
 weekdays = ['☾', '♂', '☿', '♃', '♀', '♄', '☉']
 
-LEAP_YEAR_EXCEPTIONS = { 35, 85, 125, 170, 210, 255, 300, 345, 390 }
-
 def name(day):
     epoch = datetime.date(1999, 12, 20)
     days = (day - epoch).days
@@ -37,7 +35,7 @@ def name(day):
     nweeks = 52
     while weeks >= 0:
         nweeks = 52
-        if year % 5 == 0 and year % 400 not in LEAP_YEAR_EXCEPTIONS:
+        if year % 5 == 0 and year % 400 % 45 != 0:
             nweeks = 53
         weeks -= nweeks
         year += 1

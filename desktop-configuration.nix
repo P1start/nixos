@@ -22,8 +22,7 @@ in
           feh --bg-fill ${./assets/wallpaper.jpg} &
         '';
       };
-    desktopManager.default = "none";
-    windowManager.default = "i3";
+    displayManager.defaultSession = "none+i3";
     videoDrivers = [ "nvidiaLegacy391" "ati" "cirrus" "intel" "vesa" "vmware" "modesetting" ];
     xkbOptions = "caps:escape,compose:paus,altwin:prtsc_rwin";
   };

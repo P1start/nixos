@@ -24,4 +24,14 @@ in
     };
     dependencies = [];
   };
+  "vim-llvm" = buildVimPlugin {
+    name = "vim-llvm";
+    src = fetchFromGitHub {
+      owner = "rhysd";
+      repo = "vim-llvm";
+      rev = "64f121c447154debbe0ee6670380190bb58ae4aa";
+      sha256 = "14s9kz124imgdngpqpk7gm8qbn68l5g4nd22a1zk625gayw15jrs";
+    };
+    dependencies = [];
+  };
 }

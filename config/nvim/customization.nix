@@ -24,6 +24,7 @@ in
       # Custom plugins
       { name = "vim-fish"; }
       { name = "vim-glsl"; }
+      { name = "vim-llvm"; }
     ];
   };
 }

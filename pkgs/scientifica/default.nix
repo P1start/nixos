@@ -7,8 +7,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "P1start";
     repo = "scientifica";
-    rev = "90656bbf408ab5b52c61f8b2cbee74aac75d50a1";
-    sha256 = "1lggf6bg35fqsbmlclb74b9y60q9rlqmwmps5b37pl5zd1jhg668";
+    rev = "f671a7743138455c7f01247acd3ecfb2bdc0f515";
+    sha256 = "1ys530lrkhwnxdlpgc7pfhd5fsnckry96sklbqb18d16dmzkb5z6";
   };
 
   installPhase = ''

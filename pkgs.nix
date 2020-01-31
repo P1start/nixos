@@ -63,7 +63,7 @@ let pkgs = oldPkgs // rec {
     websockets
   ];
   python2 = (oldPkgs.python2.withPackages _python-packages).override (args: { ignoreCollisions = true; });
-  python3 = (oldPkgs.python3.withPackages _python-3-packages).override (args: { ignoreCollisions = true; });
+  python3 = (oldPkgs.python38.withPackages _python-3-packages).override (args: { ignoreCollisions = true; });
 };
 in
   pkgs

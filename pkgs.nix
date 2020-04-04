@@ -4,7 +4,6 @@ let pkgs = oldPkgs // rec {
   # i3
   i3 = oldPkgs.i3-gaps.overrideAttrs (_: {
     patches = [
-      ./patches/i3-gaps-drag.patch
       ./patches/i3-gaps-padding.patch
     ];
   });

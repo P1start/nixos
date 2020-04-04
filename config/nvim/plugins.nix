@@ -34,4 +34,14 @@ in
     };
     dependencies = [];
   };
+  "vim-gnupg" = buildVimPlugin {
+    name = "vim-gnupg";
+    src = fetchFromGitHub {
+      owner = "jamessan";
+      repo = "vim-gnupg";
+      rev = "f663d0e857bd88cb39c16ca45c37a27488648562";
+      sha256 = "14s9kz124imgdngpqpk7gm8qbn68l5g4nd22a1zk625gayw16jrs";
+    };
+    dependencies = [];
+  };
 }

@@ -157,7 +157,6 @@ exec --no-startup-id sh -c '${pkgs.thunderbird}/bin/thunderbird'
 exec --no-startup-id ${pkgs.pidgin}/bin/pidgin
 exec --no-startup-id ${pkgs.gucharmap}/bin/gucharmap
 exec --no-startup-id ${pkgs.terminalCommand} -e "${pkgs.nvim}/bin/nvim $HOME/org/main.org" --name=termite-notes
-exec --no-startup-id ${pkgs.anki}/bin/anki
 exec --no-startup-id ${pkgs.terminalCommand} -e ${pkgs.ncmpcpp}/bin/ncmpcpp --name=termite-music
 
 # Hide borders
